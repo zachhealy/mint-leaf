@@ -1,0 +1,22 @@
+meta {
+  name: addPlant
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/addPlant
+  body: none
+  auth: inherit
+}
+
+headers {
+  Location: kitchen
+  name: greg
+  plantSpecies: snake plant
+  wateringFrequency: 5
+}
+
+settings {
+  encodeUrl: true
+}

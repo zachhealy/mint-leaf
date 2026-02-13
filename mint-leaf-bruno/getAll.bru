@@ -1,0 +1,15 @@
+meta {
+  name: getAll
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/plants
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
