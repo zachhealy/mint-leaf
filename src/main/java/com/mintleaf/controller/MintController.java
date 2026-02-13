@@ -25,8 +25,18 @@ public class MintController {
     }
 
     @GetMapping("/plants/{id}")
-    public Optional<Plant> getPlantById(@PathVariable("id") long id) {
+    public Optional<Plant> getPlantById(@PathVariable("id") Integer id) {
         return this.plantRepository.findById(id);
+    }
+
+    @GetMapping("/plants/name/{name}")
+    public Iterable<Plant> getPlantsByName(@PathVariable("name") String name) {
+        return this.plantRepository.findByName(name);
+    }
+
+    @GetMapping("/plants/location/{location}")
+    public Iterable<Plant> getPlantsByLocation(@PathVariable("location") String location) {
+        return this.plantRepository.findByLocation(location);
     }
 
     @PostMapping("/addPlant")

@@ -1,17 +1,17 @@
 meta {
-  name: getbyId
+  name: getPlantsByLocation
   type: http
-  seq: 3
+  seq: 5
 }
 
 get {
-  url: {{base_url}}/plants/:id
+  url: {{base_url}}/plants/location/:location
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 5
+  location: kitchen
 }
 
 settings {

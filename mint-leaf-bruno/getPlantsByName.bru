@@ -1,17 +1,17 @@
 meta {
-  name: getbyId
+  name: getPlantsByName
   type: http
-  seq: 3
+  seq: 4
 }
 
 get {
-  url: {{base_url}}/plants/:id
+  url: {{base_url}}/plants/name/:name
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 5
+  name: greg
 }
 
 settings {

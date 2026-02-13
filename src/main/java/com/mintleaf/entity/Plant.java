@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 public class Plant {
     @Id
     @GeneratedValue
-    public long id;
+    public Integer id;
 
     @Column(name = "Name")
     public String name;
@@ -25,11 +25,11 @@ public class Plant {
     @Column(name = "WateringFrequency")
     public int wateringFrequency;
 
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

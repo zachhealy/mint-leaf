@@ -6,7 +6,7 @@ import com.mintleaf.entity.Plant;
 
 import java.util.List;
 
-public interface PlantRepository extends JpaRepository<Plant, Long> {
+public interface PlantRepository extends JpaRepository<Plant, Integer> {
     List<Plant> findByName(String name);
 
     List<Plant> findByLocation(String location);
