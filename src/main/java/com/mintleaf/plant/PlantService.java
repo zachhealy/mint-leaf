@@ -1,5 +1,7 @@
 package com.mintleaf.plant;
 
+import java.util.Map;
+
 import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +14,18 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
-    public Iterable<Plant> getPlants(Long id, String name, String plantSpecies, String location) {
-        if (id != null) {
-            return this.plantRepository.findById(id);
+    public Iterable<Plant> getPlants(Map<String, Object> params) {
+        if (params.containsKey("id")) {
+            return this.plantRepository.findById((Long) params.get("id"));
         }
-        if (name != null) {
-            return this.plantRepository.findByName(name);
+        if (params.containsKey("name")) {
+            return this.plantRepository.findByName((String) params.get("name"));
         }
-        if (plantSpecies != null) {
-            return this.plantRepository.findByPlantSpecies(plantSpecies);
+        if (params.containsKey("plantSpecies")) {
+            return this.plantRepository.findByPlantSpecies((String) params.get("plantSpecies"));
         }
-        if (location != null) {
-            return this.plantRepository.findByLocation(location);
+        if (params.containsKey("location")) {
+            return this.plantRepository.findByLocation((String) params.get("location"));
         }
         return this.plantRepository.findAll();
 

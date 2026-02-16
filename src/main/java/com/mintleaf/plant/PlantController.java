@@ -1,5 +1,7 @@
 package com.mintleaf.plant;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +21,8 @@ public class PlantController {
     }
 
     @GetMapping("/plants")
-    public Iterable<Plant> getPlants(@RequestParam(required = false) Long id,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String plantSpecies,
-            @RequestParam(required = false) String location) {
-        return this.plantService.getPlants(id, name, plantSpecies, location);
+    public Iterable<Plant> getPlants(@RequestParam Map<String, Object> params) {
+        return this.plantService.getPlants(params);
     }
 
     @PostMapping("/plants")
