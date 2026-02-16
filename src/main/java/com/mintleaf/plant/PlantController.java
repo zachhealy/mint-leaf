@@ -19,10 +19,11 @@ public class PlantController {
     }
 
     @GetMapping("/plants")
-    public Iterable<Plant> getPlants(@RequestParam(required = false) String name,
+    public Iterable<Plant> getPlants(@RequestParam(required = false) Long id,
+            @RequestParam(required = false) String name,
             @RequestParam(required = false) String plantSpecies,
             @RequestParam(required = false) String location) {
-        return this.plantService.getPlants(name, plantSpecies, location);
+        return this.plantService.getPlants(id, name, plantSpecies, location);
     }
 
     @PostMapping("/plants")

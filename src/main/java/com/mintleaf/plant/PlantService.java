@@ -12,7 +12,10 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
-    public Iterable<Plant> getPlants(String name, String plantSpecies, String location) {
+    public Iterable<Plant> getPlants(Long id, String name, String plantSpecies, String location) {
+        if (id != null) {
+            return this.plantRepository.findById(id);
+        }
         if (name != null) {
             return this.plantRepository.findByName(name);
         }
