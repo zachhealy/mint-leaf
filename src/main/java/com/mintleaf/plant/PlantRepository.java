@@ -10,4 +10,6 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
     Iterable<Plant> findByLocation(String location);
 
+    boolean existsById(Long id);
+
 }

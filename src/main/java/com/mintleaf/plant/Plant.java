@@ -15,7 +15,7 @@ public class Plant {
     @GeneratedValue
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
 
     @Column(name = "Name")
     @Getter
