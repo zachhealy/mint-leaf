@@ -1,9 +1,10 @@
 package com.mintleaf.plant;
 
-import java.util.Map;
+import java.util.Optional;
 
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class PlantService {
@@ -14,18 +15,18 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
-    public Iterable<Plant> getPlants(Map<String, Object> params) {
-        if (params.containsKey("id")) {
-            return this.plantRepository.findById((Long) params.get("id"));
+    public Iterable<Plant> getPlants(Long id, String name, String plantSpecies, String location) {
+        if (id != null) {
+            return this.plantRepository.findById(id).stream().toList();
         }
-        if (params.containsKey("name")) {
-            return this.plantRepository.findByName((String) params.get("name"));
+        if (name != null) {
+            return this.plantRepository.findByName(name);
         }
-        if (params.containsKey("plantSpecies")) {
-            return this.plantRepository.findByPlantSpecies((String) params.get("plantSpecies"));
+        if (plantSpecies != null) {
+            return this.plantRepository.findByPlantSpecies(plantSpecies);
         }
-        if (params.containsKey("location")) {
-            return this.plantRepository.findByLocation((String) params.get("location"));
+        if (location != null) {
+            return this.plantRepository.findByLocation(location);
         }
         return this.plantRepository.findAll();
 
@@ -35,17 +36,20 @@ public class PlantService {
         return this.plantRepository.save(plant);
     }
 
-    public @Nullable Plant updatePlant(Plant plant) {
+    public Optional<Plant> updatePlant(Plant plant) {
         if (plant.getId() == null) {
-            return null;
+            return Optional.empty();
         }
         if (!this.plantRepository.existsById(plant.getId())) {
-            return null;
+            return Optional.empty();
         }
-        return this.plantRepository.save(plant);
+        return Optional.of(this.plantRepository.save(plant));
     }
 
-    public void deletePlant(Integer id) {
+    public void deletePlant(Long id) {
+        if (this.plantRepository.findById(id).isEmpty()) {
+            throw new EntityNotFoundException("Plant with id " + id + " does not exist");
+        }
         this.plantRepository.deleteById(id);
     }
 

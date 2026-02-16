@@ -1,11 +1,13 @@
 package com.mintleaf.plant;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlantRepository extends JpaRepository<Plant, Integer> {
-    Iterable<Plant> findById(Long id);
+public interface PlantRepository extends JpaRepository<Plant, Long> {
+    Optional<Plant> findById(Long id);
 
     Iterable<Plant> findByName(String name);
 
@@ -14,5 +16,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     Iterable<Plant> findByLocation(String location);
 
     boolean existsById(Long id);
+
+    void deleteById(Long id);
 
 }
