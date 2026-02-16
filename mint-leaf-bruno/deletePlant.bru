@@ -1,17 +1,17 @@
 meta {
-  name: getPlantsByName
+  name: deletePlant
   type: http
   seq: 4
 }
 
-get {
-  url: {{base_url}}/plants/name/:name
+delete {
+  url: {{base_url}}/plants?id=1
   body: none
   auth: inherit
 }
 
-params:path {
-  name: greg
+params:query {
+  id: 1
 }
 
 settings {
