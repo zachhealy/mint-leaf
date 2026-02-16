@@ -2,6 +2,7 @@ package com.mintleaf.plant;
 
 import java.util.Optional;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -16,20 +17,20 @@ public class PlantService {
     }
 
     public Iterable<Plant> getPlants(Long id, String name, String plantSpecies, String location) {
+        Specification<Plant> spec = Specification.unrestricted();
         if (id != null) {
-            return this.plantRepository.findById(id).stream().toList();
+            spec = spec.and(PlantSpec.hasId(id));
         }
         if (name != null) {
-            return this.plantRepository.findByName(name);
+            spec = spec.and(PlantSpec.hasName(name));
         }
         if (plantSpecies != null) {
-            return this.plantRepository.findByPlantSpecies(plantSpecies);
+            spec = spec.and(PlantSpec.hasPlantSpecies(plantSpecies));
         }
         if (location != null) {
-            return this.plantRepository.findByLocation(location);
+            spec = spec.and(PlantSpec.hasLocation(location));
         }
-        return this.plantRepository.findAll();
-
+        return this.plantRepository.findAll(spec);
     }
 
     public Plant addPlant(Plant plant) {
