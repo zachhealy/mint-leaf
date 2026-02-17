@@ -10,27 +10,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "plants")
 public class Plant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private Long id;
 
     @Column(name = "Name")
-    @Getter
-    @Setter
     private String name;
 
     @Column(name = "PlantSpecies")
-    @Getter
-    @Setter
     private String plantSpecies;
 
     @Column(name = "Location")
-    @Getter
-    @Setter
     private String location;
 
     @Column(name = "WateringFrequency")
