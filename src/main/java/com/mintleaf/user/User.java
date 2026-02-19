@@ -2,6 +2,8 @@ package com.mintleaf.user;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mintleaf.plant.Plant;
 
 import jakarta.persistence.Entity;
@@ -17,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 @Table(name = "users")
 public class User {
     @Id

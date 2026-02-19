@@ -1,5 +1,7 @@
 package com.mintleaf.plant;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mintleaf.user.User;
 
 import jakarta.persistence.Entity;
@@ -16,12 +18,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "plantId")
 @Table(name = "plants")
 public class Plant {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_userId", nullable = false)
-    private User owner;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long plantId;
@@ -32,7 +31,6 @@ public class Plant {
 
     private String location;
 
-    @Getter
     private int wateringFrequency;
 
     public void setWateringFrequency(int wateringFrequency) {
@@ -41,4 +39,9 @@ public class Plant {
         }
         this.wateringFrequency = wateringFrequency;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User owner;
+
 }
