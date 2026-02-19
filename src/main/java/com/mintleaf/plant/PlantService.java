@@ -41,17 +41,14 @@ public class PlantService {
         if (plant.getId() == null) {
             return Optional.empty();
         }
-        if (!this.plantRepository.existsById(plant.getId())) {
-            return Optional.empty();
-        }
-        return Optional.of(this.plantRepository.save(plant));
+        return this.plantRepository.findById(plant.getId())
+                .map(existing -> this.plantRepository.save(plant));
     }
 
     public void deletePlant(Long id) {
-        if (this.plantRepository.findById(id).isEmpty()) {
-            throw new EntityNotFoundException("Plant with id " + id + " does not exist");
-        }
-        this.plantRepository.deleteById(id);
+        Plant plant = this.plantRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Plant with id " + " does not exist"));
+        this.plantRepository.delete(plant);
     }
 
 }
