@@ -19,4 +19,8 @@ public class PlantSpec {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("location"), location);
     }
 
+    public static Specification<Plant> hasUserId(Long userId) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.isMember(userId, root.get("ownedPlants"));
+    }
+
 }

@@ -1,7 +1,7 @@
 meta {
   name: addPlant
   type: http
-  seq: 6
+  seq: 2
 }
 
 post {
@@ -12,13 +12,17 @@ post {
 
 body:json {
   {
+    "owner": {
+      "userId":1
+    },
     "name": "greg",
     "location": "kitchen",
-    "plantSpecies": "snake plant",
+    "plantSpecies": "sourdough starter",
     "wateringFrequency": "1"
   }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

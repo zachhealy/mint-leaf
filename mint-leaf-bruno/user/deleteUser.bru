@@ -1,19 +1,20 @@
 meta {
-  name: deletePlant
+  name: deleteUser
   type: http
   seq: 4
 }
 
 delete {
-  url: {{base_url}}/plants?id=10
+  url: {{base_url}}/users?id=1
   body: none
   auth: inherit
 }
 
 params:query {
-  id: 10
+  id: 1
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
