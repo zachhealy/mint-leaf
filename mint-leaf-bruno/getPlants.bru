@@ -1,0 +1,22 @@
+meta {
+  name: getPlants
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/plants
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~name: dan
+  ~plantSpecies: sour dough
+  ~location: living room
+  ~id: 
+}
+
+settings {
+  encodeUrl: true
+}

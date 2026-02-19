@@ -1,0 +1,24 @@
+meta {
+  name: addPlant
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{base_url}}/plants
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "greg",
+    "location": "kitchen",
+    "plantSpecies": "snake plant",
+    "wateringFrequency": "1"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

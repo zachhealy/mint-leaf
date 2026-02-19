@@ -1,0 +1,25 @@
+meta {
+  name: updatePlant
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{base_url}}/plants
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": "4",
+    "name": "dan",
+    "location": "living room",
+    "plantSpecies": "sour dough",
+    "wateringFrequency": "1"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,19 @@
+meta {
+  name: deletePlant
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{base_url}}/plants?id=10
+  body: none
+  auth: inherit
+}
+
+params:query {
+  id: 10
+}
+
+settings {
+  encodeUrl: true
+}
