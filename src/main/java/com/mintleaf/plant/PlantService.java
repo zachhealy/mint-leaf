@@ -47,7 +47,7 @@ public class PlantService {
 
     public void deletePlant(Long id) {
         Plant plant = this.plantRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Plant with id " + " does not exist"));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Plant with id [%d] does not exist", id)));
         this.plantRepository.delete(plant);
     }
 
