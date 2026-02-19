@@ -1,10 +1,10 @@
 meta {
-  name: addPlant
+  name: updatePlant
   type: http
-  seq: 6
+  seq: 3
 }
 
-post {
+put {
   url: {{base_url}}/plants
   body: json
   auth: inherit
@@ -12,13 +12,15 @@ post {
 
 body:json {
   {
-    "name": "greg",
-    "location": "kitchen",
-    "plantSpecies": "snake plant",
+    "id": "4",
+    "name": "dan",
+    "location": "living room",
+    "plantSpecies": "sour dough",
     "wateringFrequency": "1"
   }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

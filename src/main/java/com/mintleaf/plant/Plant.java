@@ -1,10 +1,14 @@
 package com.mintleaf.plant;
 
-import jakarta.persistence.Column;
+import com.mintleaf.user.User;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,20 +18,20 @@ import lombok.Setter;
 @Setter
 @Table(name = "plants")
 public class Plant {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_userId", nullable = false)
+    private User owner;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long plantId;
 
-    @Column(name = "Name")
     private String name;
 
-    @Column(name = "PlantSpecies")
     private String plantSpecies;
 
-    @Column(name = "Location")
     private String location;
 
-    @Column(name = "WateringFrequency")
     @Getter
     private int wateringFrequency;
 
