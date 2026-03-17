@@ -23,7 +23,11 @@ public class UserService {
             throw new IllegalArgumentException("User ID must not be null for update");
         }
         return this.userRepository.findById(user.getUserId())
-                .map(existing -> this.userRepository.save(user))
+                .map(existing -> {
+                    existing.setUsername(user.getUsername());
+                    existing.setEmail(user.getEmail());
+                    return this.userRepository.save(existing);
+                })
                 .orElseThrow(() -> new IllegalArgumentException(
                         String.format("User with id [%d] does not exist", user.getUserId())));
     }

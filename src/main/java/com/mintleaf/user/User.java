@@ -3,6 +3,7 @@ package com.mintleaf.user;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mintleaf.plant.Plant;
 
@@ -31,6 +32,7 @@ public class User {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
