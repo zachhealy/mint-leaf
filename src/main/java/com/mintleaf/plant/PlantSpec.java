@@ -20,7 +20,7 @@ public class PlantSpec {
     }
 
     public static Specification<Plant> hasUserId(Long userId) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.isMember(userId, root.get("ownedPlants"));
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("owner").get("userId"), userId);
     }
 
 }
