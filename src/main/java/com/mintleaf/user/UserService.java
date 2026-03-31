@@ -2,8 +2,11 @@ package com.mintleaf.user;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.constraints.NotBlank;
 
 @Service
+@Validated
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -17,7 +20,7 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public User addUser(User user) {
+    public User addUser(@NotBlank User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);
     }
