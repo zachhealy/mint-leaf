@@ -1,20 +1,27 @@
 package com.mintleaf.user;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.constraints.NotBlank;
 
 @Service
+@Validated
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Iterable<User> getUsers() {
         return this.userRepository.findAll();
     }
 
-    public User addUser(User user) {
+    public User addUser(@NotBlank User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);
     }
 
@@ -26,6 +33,9 @@ public class UserService {
                 .map(existing -> {
                     existing.setUsername(user.getUsername());
                     existing.setEmail(user.getEmail());
+                    if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                        existing.setPassword(passwordEncoder.encode(user.getPassword()));
+                    }
                     return this.userRepository.save(existing);
                 })
                 .orElseThrow(() -> new IllegalArgumentException(
