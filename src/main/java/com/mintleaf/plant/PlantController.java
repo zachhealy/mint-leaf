@@ -27,8 +27,9 @@ public class PlantController {
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String plantSpecies,
-            @RequestParam(required = false) String location) {
-        return this.plantService.getPlants(id, name, plantSpecies, location);
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) Long userId) {
+        return this.plantService.getPlants(id, name, plantSpecies, location, userId);
     }
 
     @PostMapping("/plants")

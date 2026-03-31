@@ -16,7 +16,7 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
-    public Iterable<Plant> getPlants(Long id, String name, String plantSpecies, String location) {
+    public Iterable<Plant> getPlants(Long id, String name, String plantSpecies, String location, Long userId) {
         Specification<Plant> spec = Specification.unrestricted();
         if (id != null) {
             spec = spec.and(PlantSpec.hasId(id));
@@ -30,6 +30,9 @@ public class PlantService {
         if (location != null) {
             spec = spec.and(PlantSpec.hasLocation(location));
         }
+        if (userId != null) {
+            spec = spec.and(PlantSpec.hasUserId(userId));
+        }
         return this.plantRepository.findAll(spec);
     }
 
@@ -38,10 +41,10 @@ public class PlantService {
     }
 
     public Optional<Plant> updatePlant(Plant plant) {
-        if (plant.getId() == null) {
+        if (plant.getPlantId() == null) {
             return Optional.empty();
         }
-        return this.plantRepository.findById(plant.getId())
+        return this.plantRepository.findById(plant.getPlantId())
                 .map(existing -> this.plantRepository.save(plant));
     }
 
